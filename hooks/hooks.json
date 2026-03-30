@@ -1,0 +1,15 @@
+{
+  "description": "Parses $key(args) tokens in user prompts and injects enriched project context",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/scripts/enrich.js"
+          }
+        ]
+      }
+    ]
+  }
+}
