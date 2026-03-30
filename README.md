@@ -25,10 +25,10 @@ Since enrichers are dynamic and project-specific, you define them in the target 
 
 ## Installation
 
-Install the plugin globally or via your local marketplace.
+Install the plugin directly from the GitHub repository via your local marketplace.
 
 ```shell
-/plugin marketplace add <path-to-context-runes-repo>
+/plugin marketplace add https://github.com/darkrymit/context-runes
 /plugin install context-runes
 ```
 
@@ -78,7 +78,8 @@ Expected output for `enrich.js` is a JSON object with a `hookSpecificOutput.addi
 ```text
 context-runes/
 ├── .claude-plugin/
-│   └── plugin.json
+│   ├── plugin.json
+│   └── marketplace.json
 ├── hooks/
 │   └── hooks.json              # UserPromptSubmit hook registration
 ├── scripts/
@@ -88,4 +89,6 @@ context-runes/
 ├── skills/
 │   └── query-context-runes/
 │       └── SKILL.md            # Skill for querying available runes
+├── LICENSE
 └── README.md
+```
