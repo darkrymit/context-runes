@@ -1,5 +1,10 @@
+# IDE
 .vscode/*
 .history/
 *.vsix
 .idea/*
 *.iml
+
+# Sub-repos (separate GitHub repos, stored locally as subdirs)
+context-runes-cli/
+context-runes-aci/
