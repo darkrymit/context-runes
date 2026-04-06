@@ -12,7 +12,7 @@ A rune is simply a JavaScript module living inside your project:
 
 ```js
 // .context-runes/runes/structure.js
-export function generate(dir, args, utils) {
+export async function generate(dir, args, utils, opts) {
   // Build and return your live file tree, docs, or API surface
   // This executes on demand, ensuring 100% up-to-date context
   return generateLiveProjectTree(dir); 
@@ -42,7 +42,7 @@ Context-runes is split into modular packages so you only use what you need:
 
 | Repository | Description |
 |---|---|
-| [context-runes-cli](https://github.com/darkrymit/context-runes-cli) | Core CLI (`crunes`) — init, create, query, and validate runes. Works standalone in any environment. |
+| [context-runes-cli](https://github.com/darkrymit/context-runes-cli) | Core CLI (`crunes`) — init, create, query, validate, and manage plugins. Works standalone in any environment. |
 | [context-runes-aci](https://github.com/darkrymit/context-runes-aci) | Agentic Coder Interface — native integrations built on top of the CLI (Claude Code integration available; more planned). |
 
 ## License
