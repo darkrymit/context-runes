@@ -1,6 +1,6 @@
 ---
 tags:
-  - proposed
+  - completed
 ---
 
 # Proposal: ACI Section Targeting (`$key:section`)

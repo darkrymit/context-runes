@@ -11,7 +11,7 @@ tags:
 
 ## Overview
 
-`crunes create` scaffolds individual runes. There is no equivalent for scaffolding an entire plugin. `crunes plugin create` generates the full `.context-runes-plugin/` structure, `runes/` and `runes-templates/` folders, and supporting files so a plugin author can go from zero to a publishable plugin in one command.
+`crunes create` scaffolds individual runes. There is no equivalent for scaffolding an entire plugin. `crunes plugin create` generates the full `.context-runes-plugin/` structure, `runes/` and `templates/` folders, and supporting files so a plugin author can go from zero to a publishable plugin in one command.
 
 ---
 
@@ -46,7 +46,7 @@ In interactive mode, the command prompts for name and description. With `-y`, al
 │   └── marketplace.json
 ├── runes/
 │   └── example.js            ← annotated starter rune
-├── runes-templates/
+├── templates/
 │   └── example-template.js   ← annotated starter template
 ├── README.md
 ├── CHANGELOG.md
@@ -125,7 +125,7 @@ export async function generate(dir, args, utils, opts) {
 }
 ```
 
-### `runes-templates/example-template.js`
+### `templates/example-template.js`
 
 Annotated starter for template runes — identical signature, with a comment explaining the copy-on-scaffold behaviour.
 

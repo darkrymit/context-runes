@@ -1,6 +1,6 @@
 ---
 tags:
-  - proposed
+  - done
 ---
 
 # Proposal: `crunes version` and Update Check
@@ -49,7 +49,7 @@ update-available 1.1.0
 ## Update Check Behaviour
 
 - Makes a single GET request to `https://registry.npmjs.org/@darkrymit/context-runes/latest` and reads the `version` field.
-- Result is cached in `~/.context-runes/update-check.json` with a TTL of 24 hours — the network call only happens once per day regardless of how many times `crunes version` is run.
+- Result is cached in `~/.context-runes/update-check.json` with a TTL of 1 hour — the network call only happens once per hour regardless of how many times `crunes version` is run.
 - If the network call fails (offline, timeout), it silently skips the update hint — never blocks the command.
 - Timeout is 2 seconds.
 
