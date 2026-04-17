@@ -22,11 +22,12 @@ export async function generate(dir, args, utils, opts) {
 You can query it directly from the CLI with optional arguments:
 
 ```bash
-crunes query structure
-crunes query api v2
+crunes use structure
+crunes use api=v2
+crunes use structure -a api=v2
 ```
 
-If your AI tool supports a native integration (like our Agentic Coder Interface), runes are resolved automatically and injected directly into the model's context.
+With a native integration (like our Agentic Coder Interface), your AI assistant can automatically discover runes and seamlessly inject their live output directly into its context window.
 
 ## Why Context Runes?
 
@@ -42,8 +43,8 @@ Context-runes is split into modular packages so you only use what you need:
 
 | Repository | Description |
 |---|---|
-| [context-runes-cli](https://github.com/darkrymit/context-runes-cli) | Core CLI (`crunes`) — init, create, query, validate, and manage plugins. Works standalone in any environment. |
-| [context-runes-aci](https://github.com/darkrymit/context-runes-aci) | Agentic Coder Interface — native integrations built on top of the CLI (Claude Code integration available; more planned). |
+| [context-runes-cli](https://github.com/darkrymit/context-runes-cli) | Core CLI (`crunes`) — init, create, use, bench, list, and manage plugins. Works standalone in any environment. |
+| [context-runes-aci](https://github.com/darkrymit/context-runes-aci) | Agentic Coder Interface — native integrations and skills built on top of the CLI (Claude Code and generic CLI tools supported). |
 
 ## License
 
