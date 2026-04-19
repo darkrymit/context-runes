@@ -1,6 +1,6 @@
 ---
 tags:
-  - proposed
+  - completed
 ---
 
 # Proposal: `crunes doctor`
@@ -34,10 +34,7 @@ Checks run in order; later checks that depend on earlier ones are skipped if the
 | 4 | Project config exists | `.context-runes/config.json` present in project root |
 | 5 | Config is valid JSON | Parses without error |
 | 6 | Config `format` recognised | `format` value known to this CLI version |
-| 7 | All rune files exist | Every path in `config.runes` resolves to a real file |
-| 8 | All runes export `generate` | Each rune file can be imported and exports a `generate` function |
-
-Checks 4–8 use `--cwd` if provided.
+Checks 4–6 use `--cwd` if provided.
 
 ---
 
@@ -72,7 +69,7 @@ Plain (`-p`):
 
 ## Implementation Notes
 
-- Reuses `loadConfig` and `getRune` from `core.js`.
-- Rune import check mirrors `validate` command logic — consider extracting a shared `checkRune(dir, config, key)` helper used by both `doctor` and `validate`.
-- Node version check: `process.versions.node`, compare with semver or a simple major-version integer check.
-- `crunes` in PATH: `child_process.spawnSync('crunes', ['--version'])` — success if exit code is 0.
+- Reuses `loadConfig` from `core.js`.
+- Node version: `process.versions.node`, integer major-version comparison.
+- `crunes` in PATH: `child_process.spawnSync('crunes', ['--version'])` — pass if exit code is `0`.
+- Does NOT check rune files or run any runes — use `crunes check <key>` for rune correctness.

@@ -1,6 +1,6 @@
 ---
 tags:
-  - proposed
+  - completed
 ---
 
 ## Dependencies
@@ -24,9 +24,9 @@ const pkg = await utils.json.read('package.json');
 // Return null if file not found, still throws on invalid JSON
 const tsconfig = await utils.json.read('tsconfig.json', { throw: false });
 
-// Read a specific key path (dot-notation)
-const deps = await utils.json.get('package.json', 'dependencies');
-const main = await utils.json.get('package.json', 'scripts.build');
+// Read a specific value using JSONPath
+const deps = await utils.json.get('package.json', '$.dependencies');
+const main = await utils.json.get('package.json', '$.scripts.build');
 ```
 
 ---
@@ -37,8 +37,10 @@ const main = await utils.json.get('package.json', 'scripts.build');
 |--------|---------|
 | `json.read(path)` | `object` — parsed JSON |
 | `json.read(path, { throw: false })` | `object \| null` |
-| `json.get(path, keyPath)` | `any` — value at dot-notation key path, or `undefined` |
-| `json.get(path, keyPath, defaultValue)` | `any` — value or default if missing |
+| `json.get(path, jsonPath)` | `any` — first match for JSONPath expression, or `undefined` |
+| `json.get(path, jsonPath, defaultValue)` | `any` — first match or default if no match |
+| `json.getAll(path, jsonPath)` | `any[]` — all matches, or `[]` if file not found or no match |
+| `json.getAll(path, jsonPath, defaultValue)` | `any[]` — all matches, or `defaultValue` if file not found or no match |
 
 ---
 
@@ -61,7 +63,7 @@ This is significantly more actionable than a raw `JSON.parse` throw.
 
 - Backed by `utils.fs.read` — inherits all cross-platform path handling and BOM stripping.
 - Parse errors caught and re-thrown as `JsonParseError` with file path and position extracted from the native error message.
-- `json.get` uses a simple dot-path traversal — does not support bracket notation or arrays (keep it minimal).
+- `json.get` uses `jsonpath-plus` for JSONPath evaluation (`$.scripts.build`, `$..name`, `$[?(@.version)]`, etc.). Returns the first match (`wrap: false`); falls back to `defaultValue` when no match.
 - `utils.json` is added to `createUtils` in `core.js` alongside `utils.fs`.
 
 ---
@@ -90,7 +92,7 @@ export async function generate(dir, args, utils) {
 
 // Read a specific value without loading the whole file
 export async function generate(dir, args, utils) {
-  const nodeVersion = await utils.json.get('package.json', 'engines.node', 'unspecified');
+  const nodeVersion = await utils.json.get('package.json', '$.engines.node', 'unspecified');
   return utils.section('node-version', {
     type: 'markdown',
     content: `Required Node.js: ${nodeVersion}`,

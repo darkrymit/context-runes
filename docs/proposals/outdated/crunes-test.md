@@ -1,6 +1,6 @@
 ---
 tags:
-  - proposed
+  - outdated
 ---
 
 # Proposal: `crunes test`
@@ -71,19 +71,6 @@ Plain (`-p`):
 [err] api section "Public Endpoints" has a space — use "public-endpoints"
 1 problem found.
 ```
-
----
-
-## Relationship to `validate`
-
-`crunes validate` checks that runes are loadable (file exists, exports `generate`). `crunes test` goes further — it actually **runs** the rune and checks the output shape. They are complementary:
-
-| Command | Runs the rune? | Checks output shape? |
-|---------|---------------|----------------------|
-| `validate` | No | No |
-| `test` | Yes | Yes |
-
-`doctor` calls `validate` internally. A future improvement could have `doctor` optionally call `test` as well.
 
 ---
 
