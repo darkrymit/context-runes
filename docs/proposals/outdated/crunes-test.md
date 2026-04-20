@@ -1,6 +1,6 @@
 ---
 tags:
-  - outdated
+  - closed
 ---
 
 # Proposal: `crunes test`

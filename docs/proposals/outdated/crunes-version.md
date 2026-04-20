@@ -1,6 +1,6 @@
 ---
 tags:
-  - done
+  - completed
 ---
 
 # Proposal: `crunes version` and Update Check
