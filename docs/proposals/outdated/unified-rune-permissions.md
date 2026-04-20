@@ -1,6 +1,6 @@
 ---
 tags:
-  - outdated
+  - completed
 ---
 
 ## Dependencies
