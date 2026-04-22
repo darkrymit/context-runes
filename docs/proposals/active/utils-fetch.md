@@ -3,22 +3,26 @@ tags:
   - proposed
 ---
 
-# Proposal: `utils.http`
+# Proposal: Remote Data Fetching (`utils.fetch`)
 
 ## Overview
 
-Runes are currently limited to local project data. Many context gathering tasks require external data: fetching issue details from Jira/GitHub, pulling documentation from a wiki, or querying a status API. `utils.http` provides a sandboxed, permission-gated HTTP client for runes.
+Runes often need to enrich project context with external data — such as GitHub issues, Jira tickets, or package registry metadata. 
+
+This proposal introduces **`utils.fetch`**, a permission-gated HTTP client that mirrors the standard Web Fetch API.
 
 ---
 
 ## API
 
-A new `http` object is added to `utils`:
+The utility is exposed as `utils.fetch`, following the standard signature:
 
 ```js
-await utils.http.fetch(url, options?)
-// Returns: Promise<HttpResponse>
+const response = await utils.fetch(url, options?)
 ```
+
+- **`url`**: The absolute URL to fetch.
+- **`options`**: (Optional) Object containing `method`, `headers`, `body`, etc.
 
 ### `HttpResponse`
 - `ok`: boolean
@@ -69,16 +73,16 @@ Plugins must explicitly declare which URLs and methods they are allowed to acces
 - `http:https://docs.local/*` — Implicitly allow only GET (default).
 
 ### Security
-- **No recursive HTTP**: `utils.http` is not available to runes called via `utils.rune` unless the *calling* rune also has the required permissions.
+- **No recursive HTTP**: `utils.fetch` is not available to runes called via `utils.rune` unless the *calling* rune also has the required permissions.
 - **Isolate safety**: The actual request is performed on the host side using Node's `fetch`. The isolate only sees the serialized response.
-- **Local Runes**: Local runes (in `.context-runes/runes/`) have unrestricted HTTP access by default.
+- **Local Runes**: Local runes (in `.crunes/runes/`) have unrestricted HTTP access by default.
 
 ---
 
 ## Implementation Notes
 
-1. **Host Side**: `src/api/utils/http.js` uses native `fetch` (Node 20+).
-2. **Isolate Bridge**: `src/isolation/runner.js` exposes `$__utils_http_fetch` as an `ivm.Reference`.
+1. **Host Side**: `src/api/utils/fetch.js` uses native `fetch` (Node 20+).
+2. **Isolate Bridge**: `src/isolation/runner.js` exposes `$__utils_fetch` as an `ivm.Reference`.
 3. **Permission Checker**: `src/isolation/permissions.js` is updated to handle `http:` prefixes.
 4. **Timeout**: A hard limit is enforced on the host side to prevent runes from hanging the CLI.
 5. **Redirects**: Followed automatically up to a limit (default 5).
