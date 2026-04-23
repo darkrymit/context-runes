@@ -43,7 +43,7 @@ const response = await utils.fetch(url, options?)
 
 ## Permissions
 
-Plugins must explicitly declare which URLs and methods they are allowed to access. Permission strings follow the `http:[METHOD:]<pattern>` format:
+Plugins must explicitly declare which URLs and methods they are allowed to access. Permission strings follow the `fetch:[METHOD:]<pattern>` format:
 
 ```json
 {
@@ -52,8 +52,8 @@ Plugins must explicitly declare which URLs and methods they are allowed to acces
     "jira-info": {
       "permissions": {
         "allow": [
-          "http:GET:https://jira.company.com/rest/api/2/issue/*",
-          "http:POST:https://analytics.internal.com/log"
+          "fetch:GET:https://jira.company.com/rest/api/2/issue/*",
+          "fetch:POST:https://analytics.internal.com/log"
         ]
       }
     }
@@ -68,14 +68,14 @@ Plugins must explicitly declare which URLs and methods they are allowed to acces
 - Port matching is supported (`https://localhost:8080/*`).
 
 ### Examples
-- `http:GET:https://api.github.com/*` — Allow only GET requests to GitHub API.
-- `http:*:https://staging.internal/*` — Allow any HTTP method to the staging server.
-- `http:https://docs.local/*` — Implicitly allow only GET (default).
+- `fetch:GET:https://api.github.com/*` — Allow only GET requests to GitHub API.
+- `fetch:*:https://staging.internal/*` — Allow any HTTP method to the staging server.
+- `fetch:https://docs.local/*` — Implicitly allow only GET (default).
 
 ### Security
 - **No recursive HTTP**: `utils.fetch` is not available to runes called via `utils.rune` unless the *calling* rune also has the required permissions.
 - **Isolate safety**: The actual request is performed on the host side using Node's `fetch`. The isolate only sees the serialized response.
-- **Local Runes**: Local runes (in `.crunes/runes/`) have unrestricted HTTP access by default.
+- **Local Runes**: Local runes go through the same `makePermissionChecker` pipeline as plugin runes and must declare `fetch:` permissions in their `config.json` entry.
 
 ---
 
@@ -83,7 +83,7 @@ Plugins must explicitly declare which URLs and methods they are allowed to acces
 
 1. **Host Side**: `src/api/utils/fetch.js` uses native `fetch` (Node 20+).
 2. **Isolate Bridge**: `src/isolation/runner.js` exposes `$__utils_fetch` as an `ivm.Reference`.
-3. **Permission Checker**: `src/isolation/permissions.js` is updated to handle `http:` prefixes.
+3. **Permission Checker**: `src/isolation/permissions.js` is updated to handle `fetch:` prefixes.
 4. **Timeout**: A hard limit is enforced on the host side to prevent runes from hanging the CLI.
 5. **Redirects**: Followed automatically up to a limit (default 5).
 
