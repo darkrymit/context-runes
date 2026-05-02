@@ -6,8 +6,8 @@
 *.iml
 
 # Sub-repos (separate GitHub repos, stored locally as subdirs)
-context-runes-cli/
-context-runes-aci/
+crunes-cli/
+crunes-aci/
 
 # Obsidian local state (workspace layout and appearance are per-user)
 docs/proposals/.obsidian/workspace.json
