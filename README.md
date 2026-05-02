@@ -1,8 +1,8 @@
-# context-runes
+# crunes
 
 New session. The AI runs `find . -type f` *again*. Your `CLAUDE.md` has a file tree from three weeks ago. You're pasting the exact same API reference into your prompt for the fifth time today.
 
-**context-runes** fixes this. It lets you define **runes**—small, project-local scripts that generate context on demand.
+**crunes** fixes this. It lets you define **runes**—small, project-local scripts that generate context on demand.
 
 Query them from the CLI, pipe them into scripts, or let a native integration inject them automatically into your AI tool. No stale snapshots. No repeated bash commands. No bloated config files.
 
@@ -11,7 +11,7 @@ Query them from the CLI, pipe them into scripts, or let a native integration inj
 A rune is simply a JavaScript module living inside your project:
 
 ```js
-// .context-runes/runes/structure.js
+// .crunes/runes/structure.js
 export async function generate(dir, args, utils, opts) {
   // Build and return your live file tree, docs, or API surface
   // This executes on demand, ensuring 100% up-to-date context
@@ -43,8 +43,8 @@ Context-runes is split into modular packages so you only use what you need:
 
 | Repository | Description |
 |---|---|
-| [context-runes-cli](https://github.com/darkrymit/context-runes-cli) | Core CLI (`crunes`) — init, create, use, bench, list, and manage plugins. Works standalone in any environment. |
-| [context-runes-aci](https://github.com/darkrymit/context-runes-aci) | Agentic Coder Interface — native integrations and skills built on top of the CLI (Claude Code and generic CLI tools supported). |
+| [crunes-cli](https://github.com/darkrymit/crunes-cli) | Core CLI (`crunes`) — init, create, use, bench, list, and manage plugins. Works standalone in any environment. |
+| [crunes-aci](https://github.com/darkrymit/crunes-aci) | Agentic Coder Interface — native integrations and skills built on top of the CLI (Claude Code and generic CLI tools supported). |
 
 ## License
 
