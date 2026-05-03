@@ -1,6 +1,6 @@
 ---
 tags:
-  - proposed
+  - closed
 ---
 
 # Proposal: Rune Actions (`use` and `cast`)
