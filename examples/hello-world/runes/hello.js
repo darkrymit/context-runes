@@ -1,5 +1,5 @@
-export async function generate(_dir, _args, utils, _opts) {
-  return utils.section('hello', {
+export async function generate(_dir, _args, utils) {
+  return utils.section.create('hello', {
     type: 'markdown',
     content: 'Hello, World!',
   })

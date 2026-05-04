@@ -5,7 +5,7 @@
 //   allow: []   — add patterns here if you use utils.shell or utils.fs
 //   deny:  []
 
-export async function generate(dir, args, utils, opts) {
+export async function generate(dir, args, utils) {
   const who = args[0] ?? 'World'
 
   const content = [
@@ -13,5 +13,5 @@ export async function generate(dir, args, utils, opts) {
     utils.md.p('Add your own context here.'),
   ].join('\n')
 
-  return utils.section('greeting', { type: 'markdown', content })
+  return utils.section.create('greeting', { type: 'markdown', content })
 }

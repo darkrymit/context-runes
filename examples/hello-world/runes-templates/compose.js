@@ -11,7 +11,7 @@ export async function generate(dir, args, utils) {
   const greetingSections = await utils.rune('greeting')
 
   const summarySections = [
-    utils.section('compose-summary', {
+    utils.section.create('compose-summary', {
       type: 'markdown',
       content: utils.md.p('Add your own summary or additional context here.'),
     }),
